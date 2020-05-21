@@ -1,3 +1,5 @@
+#coding=utf-8
+
 def insert_sort(a):
     """ сортировка списка вставками"""
     n = len(a)
@@ -82,8 +84,10 @@ def test_sort(sort_method):
     print("тестируем: ", sort_method.__doc__)
     print("test case #1", end=" ")
     a = [4, 2, 5, 1, 3]
+    print(a)
     a_sorted = [1, 2, 3, 4, 5]
     sort_method(a)
+    print(a)
     print("OK" if a == a_sorted else "False")
 
     print("test case #2", end=" ")
@@ -107,9 +111,44 @@ def test_count_sort(sort_method):
     sort_method(a, 9)
     # print("OK" if a == a_sorted else "False")
 
+def bubble_sort_second(list_data):
+    n = len(list_data)
+    for j in range(1, n):
+        for i in range(0, n - j):
+            if list_data[i] > list_data[i + 1]:
+                list_data[i], list_data[i + 1] = list_data[i + 1], list_data[i]
+
+    return list
+
+def bubble_sort_third(list_data):
+
+    position = len(list_data) - 1
+    exchanges = True
+
+    while position > 0 and exchanges:
+        exchanges = False
+        for i in range(position):
+            if list_data[i] > list_data[i + 1]:
+                exchanges = True
+                list_data[i], list_data[i + 1] = list_data[i + 1], list_data[i]
+
+        position -= 1
+
+def choice_sort(list_data):
+    number = len(list_data)
+    index_max_element = 0
+    for i in range(number - 1, 0, -1):
+        index_max_element = 0
+        for j in range(1, i + 1):
+            if list_data[j] > list_data[index_max_element]:
+                index_max_element = j
+
+        list_data[index_max_element], list_data[i] = list_data[i], list_data[index_max_element]
+
+
 
 if __name__ == "__main__":
-    test_sort(test_method_1)
-    test_sort(test_mehtod_3)
-    test_sort(test_method_2)
-    test_count_sort(count_sort)
+    test_sort(choice_sort)
+    # test_sort(bubble_sort_third)
+    # test_sort(test_method_2)
+    # test_count_sort(count_sort)
